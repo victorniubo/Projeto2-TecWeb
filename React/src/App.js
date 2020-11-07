@@ -1,25 +1,47 @@
-import logo from './logo.svg';
 import './App.css';
+import Usuarios from './usuarios';
+import {BrowserRouter as Router, Route, Link, NavLink, Switch} from "react-router-dom"
+import Carteira from './carteira'
+import Cotacao from './cotacao'
+import Compra from './compra'
+import Venda from './venda'
 
 function App() {
   return (
+    <Router>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+      
+      <h2>Carteira de Criptomoedas</h2>
+      &nbsp;
+      &nbsp;
+      <NavLink activeStyle={{color:'red'}} to="/carteira" >Carteira</NavLink>
+      &nbsp;
+      &nbsp;
+      <NavLink activeStyle={{color:'red'}} to="/cotacao">Cotação</NavLink>
+      &nbsp;
+      &nbsp;
+      <NavLink activeStyle={{color:'red'}} to="/compra">Compra</NavLink>
+      &nbsp;
+      &nbsp;
+      <NavLink activeStyle={{color:'red'}} to="/venda">Venda</NavLink>
+      &nbsp;
+      &nbsp;
+    
+      <Switch>
+        <Route path="/carteira" component={Carteira}/>
+        <div className="Lista">
+        <Route path="/cotacao" component={Cotacao}/>
+        <Route path="/compra" component={Compra}/>
+        <Route path="/venda" component={Venda}/>
+        </div>
+      </Switch>
+   
 
+    </div>
+    
+    </Router>
+  );
+  
+}
+  
 export default App;
