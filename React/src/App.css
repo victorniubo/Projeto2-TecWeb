@@ -24,8 +24,42 @@
   color: white;
 }
 
+.Lista{
+  text-align: left;
+  margin-left: 3cm;
+}
+
+.ItemE{
+  float: left;
+  width: 10%;
+  margin-left: 2.2mm;
+}
+
+.ItemM{
+  float: left;
+  width: 17%
+
+}
+
+.ItemD{
+  float: left;
+  width:20%;
+  
+}
+
+.ItemE2{
+  float: left;
+  width: 50%;
+  margin-left: 2.2mm;
+}
+
+.ItemD2{
+  float: left;
+  width: 20%;
+}
+
 .App-link {
-  color: #61dafb;
+  color: #21d109;
 }
 
 @keyframes App-logo-spin {
