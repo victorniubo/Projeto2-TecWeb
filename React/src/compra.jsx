@@ -7,12 +7,12 @@ var Compra = () => {
              <u><h3>Efetuar Compra:</h3></u>
             <br/>
             <h3>&nbsp;&nbsp;&nbsp;Moeda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valor</h3>
-            
+
             
             <div id="itens">
             <div className="ItemE">
             
-            <select name="cars" id="cars">
+            <select name="coins" id="coins">
                     <option value="bitcoin">BitCoin</option>
                     <option value="ethereum">Ethereum</option>
                     <option value="bitcoinC">BitCoin Cash</option>

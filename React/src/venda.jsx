@@ -12,7 +12,7 @@ var Venda = () => {
        <div id="itens">
        <div className="ItemE">
        
-       <select name="cars" id="cars">
+       <select name="moedas" id="moedas">
                <option value="bitcoin">BitCoin</option>
                <option value="ethereum">Ethereum</option>
                <option value="bitcoinC">BitCoin Cash</option>
