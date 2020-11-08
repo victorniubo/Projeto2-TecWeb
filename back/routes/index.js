@@ -39,7 +39,7 @@ router.post('/addTrade', function(req, res){
   var amount = req.body.amount;
 
   var Users = db.Mongoose.model('usercollection', db.UserSchema, 'usercollection');
-
+  
   var user = new Users({username: userName, coin:coin, type:type, price:price, amount:amount});
   user.save(function (err){
     if (err){

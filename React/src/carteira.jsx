@@ -10,11 +10,11 @@ export default class Carteira extends Component{
         ];
 
         var moedas = [
-            {moeda1: 'BitCoin:'},
-            {moeda2: 'Ethereum:'},
-            {moeda3: 'BitCoin Cash:'},
-            {moeda4: 'LiteCoin:'},
-            {moeda5: 'Ripple:'}
+            {moeda: 'BitCoin:'},
+            {moeda: 'Ethereum:'},
+            {moeda: 'BitCoin Cash:'},
+            {moeda: 'LiteCoin:'},
+            {moeda: 'Ripple:'}
         ];
 
         var listTransacs = trans.map(function(transaction) {
