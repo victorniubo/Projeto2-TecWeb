@@ -9,7 +9,6 @@ export default class Venda extends Component{
     constructor(props){
         super(props);
         this.state = {
-            number:0,
             venda: {
                 username: "a",
                 coin: "",
@@ -27,8 +26,8 @@ export default class Venda extends Component{
         this.changeMoeda = this.changeMoeda.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
-        this.makeJason = this.makeJason.bind(this);
-        // this.sendJason = this.sendJason(this);
+        // this.submitHandler = this.submitHandler.bind(this);
+       
     }
     async componentDidMount(){
         const btc = await api.get('BRLBTC/ticker')
@@ -46,16 +45,18 @@ export default class Venda extends Component{
 
     changeMoeda(event){
         var handleState = (state, event) => {
-            state.selec = event.target.value
+            state.venda.coin = event.target.value
+
             return state
         }
         this.setState(handleState(this.state, event))
-        console.log("moeda selecionada", this.state.selec)
+        console.log("moeda selecionada", this.state.venda.coin)
     }
     
     handleChange(event) {
         var handleState = (state, event) => {
-            state.number = event.target.value
+            state.venda.amount = event.target.value
+            
             return state
         }
         console.log(event.target.value)
@@ -64,13 +65,12 @@ export default class Venda extends Component{
         
     }
 
-    makeJason(){
-        this.setState(state => {
-            state.venda.coin = state.selec
-            state.venda.amount = state.number
-            // state.compra.compra.price
-        });
+    submitHandler = e => {
+        e.preventDefault()
+        console.log(this.state)
+        axios.post("http://localhost:3000/addTrade", this.state.venda)
     }
+
 
     // sendJason(){
     //     axios.post("http://localhost:3000/addTrade", this.state.compra)
@@ -80,23 +80,25 @@ export default class Venda extends Component{
 
     render() {
 
+        const {compra} = this.state
+
         return(
             <div>
                  <u><h3>Efetuar Venda:</h3></u>
                 <br/>
                 <h3>&nbsp;&nbsp;&nbsp;Moeda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valor</h3>
     
-                
+                <form onSubmit={this.submitHandler} >
                 <div id="itens">
                 <div className="ItemE">
                 
                 <select onChange={this.changeMoeda} name="coins" id="coins">
                         <option>Selecione...</option>
-                        <option value="BTC">BitCoin</option>
-                        <option value="ETH">Ethereum</option>
-                        <option value="BCH">BitCoin Cash</option>
-                        <option value="LTC">LiteCoin</option>
-                        <option value="XRP">Ripple</option>
+                        <option value="BitCoin">BitCoin</option>
+                        <option value="Ethereum">Ethereum</option>
+                        <option value="BitCoin Cash">BitCoin Cash</option>
+                        <option value="LiteCoin">LiteCoin</option>
+                        <option value="Ripple">Ripple</option>
                     </select>
                     
         
@@ -104,17 +106,17 @@ export default class Venda extends Component{
                 </div>
                 <div className="ItemM">
                 
-                    <input type="number" id="moeda2" name="moeda2" value = {this.state.number} 
+                    <input type="number" id="moeda1" name="moeda1" value = {this.state.venda.amount} 
                     onChange={this.handleChange}></input>
                     
                 </div>
     
                 <div className="ItemD">
-                    <input type="submit" value="Vender" onClick={this.sendJason}/>
+                    <button type="submit"  >Vender</button>
                 </div>
     
                 </div>
-               
+                </form>
                 <br/>
                
                 
@@ -124,3 +126,4 @@ export default class Venda extends Component{
 
     }
 }
+
