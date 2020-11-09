@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import apint from './apint'
 import './App.css';
-import axios from 'axios';
 
 
 export default class Carteira extends Component{
@@ -9,58 +8,45 @@ export default class Carteira extends Component{
     constructor(props){
         super(props);
         this.state = {
-            listaTrans:[]
+            listaTrans:[],
+            portfolio:[]
             
         }
 
-        
+        console.log(this.props.location.tokenProps)
         this.componentDidMount = this.componentDidMount.bind(this);
-        this.deleta = this.deleta.bind(this);
     }
 
-
+    
     async componentDidMount(){
-        const allT = await apint.get('api/trade/all/'+this.props.token)
+        const allT = await apint.get('api/trades/all/',{headers:{"auth-token":this.props.location.tokenProps.token}})
                 
-        this.setState( {listaTrans : allT.data });
-  
+        
+        
+        const portfolio = await apint.get("api/trades/portfolio",{headers:{"auth-token":this.props.location.tokenProps.token}})
+        // console.log("portfolio::", portfolio.data)
+
+        this.setState( {listaTrans : allT.data, portfolio:portfolio.data});
        
     }
 
-    deleta = (id) => {
-        axios.delete("http://localhost:3000/deleteTrade/"+id)
-        
-    }
+    
+    
 
     render() {
 
-        var {listaTrans} = this.state;
-
-        var moedas = [
-            {moeda: 'BitCoin:'},
-            {moeda: 'Ethereum:'},
-            {moeda: 'BitCoin Cash:'},
-            {moeda: 'LiteCoin:'},
-            {moeda: 'Ripple:'}
-        ];
+        var {listaTrans, portfolio} = this.state;
+        
 
         var listTransacs = listaTrans.map(function(transaction) {
             return (
             
-            <li>{transaction.type+", "+transaction.coin+", "+transaction.amount}
-            &nbsp;
-            &nbsp;
-                <input type="button" className="button.css" value="Delete" />
-            </li>
+            <li>{transaction.type+", "+transaction.coin+", "+transaction.amount}</li>
             
             );
         });
 
-        var listaMoedas = moedas.map(function(moeda) {
-            return (
-            <li>{moeda.moeda}</li>
-            );
-        });
+        
 
         return (
 
@@ -84,7 +70,11 @@ export default class Carteira extends Component{
                 <h3>Totais:</h3>
                
                 <ul>
-                    {listaMoedas}
+                    <li>{"BitCoin: "+portfolio.BTC}</li>
+                    <li>{"Ethereum: "+portfolio.ETH}</li>
+                    <li>{"BitCoin Cash: "+portfolio.BCH}</li>
+                    <li>{"LiteCoin: "+portfolio.LTC}</li>
+                    <li>{"Ripple: "+portfolio.XRP}</li>
                 </ul>
 
             </div>

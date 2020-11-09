@@ -24,16 +24,36 @@ export default class Inicial extends Component{
             <h2>Carteira de Criptomoedas</h2>
             &nbsp;
             &nbsp;
-            <NavLink activeStyle={{color:'red'}} to="/carteira" >Carteira</NavLink>
+            <NavLink activeStyle={{color:'red'}} to={{
+                pathname:"/carteira",
+                tokenProps:{
+                    token:this.props.token
+                }
+                }} >Carteira</NavLink>
             &nbsp;
             &nbsp;
-            <NavLink activeStyle={{color:'red'}} to="/cotacao">Cotação</NavLink>
+            <NavLink activeStyle={{color:'red'}} to={{
+                pathname:"/cotacao",
+                tokenProps:{
+                    token:this.props.token
+                }
+                }}>Cotação</NavLink>
             &nbsp;
             &nbsp;
-            <NavLink activeStyle={{color:'red'}} to="/compra">Compra</NavLink>
+            <NavLink activeStyle={{color:'red'}} to={{
+                pathname:"/compra",
+                tokenProps:{
+                    token:this.props.token
+                }
+                }}>Compra</NavLink>
             &nbsp;
             &nbsp;
-            <NavLink activeStyle={{color:'red'}} to="/venda">Venda</NavLink>
+            <NavLink activeStyle={{color:'red'}} to={{
+                pathname:"/venda",
+                tokenProps:{
+                    token:this.props.token
+                }
+                }}>Venda</NavLink>
             &nbsp;
             &nbsp;
       </div>
