@@ -20,7 +20,7 @@ export default class Carteira extends Component{
 
 
     async componentDidMount(){
-        const allT = await apint.get('alltrades')
+        const allT = await apint.get('api/trade/all/'+this.props.token)
                 
         this.setState( {listaTrans : allT.data });
   
