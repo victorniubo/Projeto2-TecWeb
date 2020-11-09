@@ -58,6 +58,13 @@
   width: 20%;
 }
 
+.button_css
+{
+  
+	width: 30px;
+	height: 30px;
+}
+
 .App-link {
   color: #21d109;
 }

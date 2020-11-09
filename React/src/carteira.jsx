@@ -1,13 +1,40 @@
-import react, { Component } from 'react'
+import React, { Component } from 'react'
+import apint from './apint'
+import './App.css';
+import axios from 'axios';
+
 
 export default class Carteira extends Component{
 
+    constructor(props){
+        super(props);
+        this.state = {
+            listaTrans:[]
+            
+        }
+
+        
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.deleta = this.deleta.bind(this);
+    }
+
+
+    async componentDidMount(){
+        const allT = await apint.get('alltrades')
+                
+        this.setState( {listaTrans : allT.data });
+  
+       
+    }
+
+    deleta = (id) => {
+        axios.delete("http://localhost:3000/deleteTrade/"+id)
+        
+    }
+
     render() {
 
-        var trans = [
-            {transac: 'venda 1'},
-            {transac: 'compra 1'} 
-        ];
+        var {listaTrans} = this.state;
 
         var moedas = [
             {moeda: 'BitCoin:'},
@@ -17,10 +44,14 @@ export default class Carteira extends Component{
             {moeda: 'Ripple:'}
         ];
 
-        var listTransacs = trans.map(function(transaction) {
+        var listTransacs = listaTrans.map(function(transaction) {
             return (
             
-            <li>{transaction.transac}</li>
+            <li>{transaction.type+", "+transaction.coin+", "+transaction.amount}
+            &nbsp;
+            &nbsp;
+                <input type="button" className="button.css" value="Delete" />
+            </li>
             
             );
         });
@@ -37,7 +68,7 @@ export default class Carteira extends Component{
             <div className="ItemE2">
             <div className="Lista">
                 
-                <h3>Lista de Transações</h3>
+                <h3>Lista de Transações(Tipo, Moeda, Quant.)</h3>
                
                 <ul>
                     {listTransacs}

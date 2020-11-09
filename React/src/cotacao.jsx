@@ -25,7 +25,6 @@ export default class Cotacao extends Component{
              precos4 : ltc.data.data, precos5 : xrp.data.data });
   
        
-        console.log("aloalo",this.state);
     }
         
     render(){
