@@ -16,37 +16,22 @@ export default class Venda extends Component{
                 price: 1,
                 amount: 0
             },
-            BTC: [],
-            ETH: [],
-            BCH: [],
-            LTC: [],
-            XRP: []      
+           
         }
 
         this.changeMoeda = this.changeMoeda.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.componentDidMount = this.componentDidMount.bind(this);
-        // this.submitHandler = this.submitHandler.bind(this);
-       
+
     }
-    async componentDidMount(){
-        const btc = await api.get('BRLBTC/ticker')
-        const eth = await api.get('BRLETH/ticker')
-        const bch = await api.get('BRLBCH/ticker')
-        const ltc = await api.get('BRLLTC/ticker')
-        const xrp = await api.get('BRLXRP/ticker')
-        
-        this.setState( {BTC : btc.data.data, ETH : eth.data.data, BCH : bch.data.data,
-            LTC : ltc.data.data, XRP : xrp.data.data });
+ 
         
       
-   }
+
  
 
     changeMoeda(event){
         var handleState = (state, event) => {
             state.venda.coin = event.target.value
-
             return state
         }
         this.setState(handleState(this.state, event))
@@ -56,7 +41,6 @@ export default class Venda extends Component{
     handleChange(event) {
         var handleState = (state, event) => {
             state.venda.amount = event.target.value
-            
             return state
         }
         console.log(event.target.value)
@@ -68,25 +52,21 @@ export default class Venda extends Component{
     submitHandler = e => {
         e.preventDefault()
         console.log(this.state)
-        axios.post("http://localhost:3000/addTrade", this.state.venda)
+        axios.post("http://localhost:3003/api/trades/addTrade", this.state.venda, {headers:{"auth-token":this.props.location.tokenProps.token}})
     }
 
-
-    // sendJason(){
-    //     axios.post("http://localhost:3000/addTrade", this.state.compra)
-    // }
 
    
 
     render() {
 
-        const {compra} = this.state
+        const {venda} = this.state
 
         return(
             <div>
                  <u><h3>Efetuar Venda:</h3></u>
                 <br/>
-                <h3>&nbsp;&nbsp;&nbsp;Moeda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valor</h3>
+                <h3>&nbsp;&nbsp;&nbsp;Moeda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantidade</h3>
     
                 <form onSubmit={this.submitHandler} >
                 <div id="itens">
@@ -94,11 +74,11 @@ export default class Venda extends Component{
                 
                 <select onChange={this.changeMoeda} name="coins" id="coins">
                         <option>Selecione...</option>
-                        <option value="BitCoin">BitCoin</option>
-                        <option value="Ethereum">Ethereum</option>
-                        <option value="BitCoin Cash">BitCoin Cash</option>
-                        <option value="LiteCoin">LiteCoin</option>
-                        <option value="Ripple">Ripple</option>
+                        <option value="BTC">BitCoin</option>
+                        <option value="ETH">Ethereum</option>
+                        <option value="BCH">BitCoin Cash</option>
+                        <option value="LTC">LiteCoin</option>
+                        <option value="XRP">Ripple</option>
                     </select>
                     
         

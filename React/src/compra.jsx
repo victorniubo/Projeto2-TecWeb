@@ -16,11 +16,7 @@ export default class Compra extends Component{
                 price: 1,
                 amount: 0
             },
-            // BTC: [],
-            // ETH: [],
-            // BCH: [],
-            // LTC: [],
-            // XRP: []      
+               
         }
 
         this.changeMoeda = this.changeMoeda.bind(this);
@@ -67,7 +63,7 @@ export default class Compra extends Component{
     submitHandler = e => {
         e.preventDefault()
         console.log(this.state)
-        axios.post("http://localhost:3003/api/trades/addTrade", this.state.compra)
+        axios.post("http://localhost:3003/api/trades/addTrade", this.state.compra, {headers:{"auth-token":this.props.location.tokenProps.token}})
     }
 
 
@@ -85,7 +81,7 @@ export default class Compra extends Component{
             <div>
                  <u><h3>Efetuar Compra:</h3></u>
                 <br/>
-                <h3>&nbsp;&nbsp;&nbsp;Moeda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valor</h3>
+                <h3>&nbsp;&nbsp;&nbsp;Moeda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantidade</h3>
     
                 <form onSubmit={this.submitHandler} >
                 <div id="itens">
@@ -93,11 +89,11 @@ export default class Compra extends Component{
                 
                 <select onChange={this.changeMoeda} name="coins" id="coins">
                         <option>Selecione...</option>
-                        <option value="BitCoin">BitCoin</option>
-                        <option value="Ethereum">Ethereum</option>
-                        <option value="BitCoin Cash">BitCoin Cash</option>
-                        <option value="LiteCoin">LiteCoin</option>
-                        <option value="Ripple">Ripple</option>
+                        <option value="BTC">BitCoin</option>
+                        <option value="ETH">Ethereum</option>
+                        <option value="BCH">BitCoin Cash</option>
+                        <option value="LTC">LiteCoin</option>
+                        <option value="XRP">Ripple</option>
                     </select>
                     
         

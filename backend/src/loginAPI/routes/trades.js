@@ -67,13 +67,12 @@ router.get("/all", verify, (req, res)=>{
 router.get("/portfolio", verify, (req, res)=>{
 
     var port = {
-        BTC:[0,0],
-        ETH:[0,0],
-        LTC:[0,0],
-        BCH:[0,0],
-        XRP:[0,0],
-        Real:[0,0],
-        Total:[0,0]  
+        BTC:0,
+        ETH:0,
+        LTC:0,
+        BCH:0,
+        XRP:0
+       
       };
     var idf = req.user._id;
     User.findById(idf, function(err, result) {
@@ -81,21 +80,18 @@ router.get("/portfolio", verify, (req, res)=>{
           res.send(err);
         } else {
         result.trades.forEach(element => {
-            if(element.type == 'buy'){
+            if(element.type == 'Compra'){
     
               // quantidade total da moeda comprada
-              port[element.coin][0] += element.amount;
-              port[element.coin][1] += element.amount * element.price;
-              port['Total'][0] += element.amount * element.price;
+              port[element.coin] += element.amount;
+              
               // port['Real'] -= element.amount * element.price;
             }
             else{
     
               // quantidade total da moeda comprada
-              port[element.coin][0] -= element.amount;
-              port[element.coin][1] -= element.amount * element.price;
-              port['Total'][0] -= element.amount * element.price;
-              port['Real'][0] += element.amount * element.price;
+              port[element.coin] -= element.amount;
+              
             }
           });
         }
